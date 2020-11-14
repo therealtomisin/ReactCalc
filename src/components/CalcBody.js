@@ -8,7 +8,8 @@ class CalcBody extends Component {
         this.state = {
              firstVal: '',
              secondVal: '',
-             operation: ''
+             operation: '',
+             answer: ''
         }
     }
     updateInput = (e) => {
@@ -21,8 +22,9 @@ class CalcBody extends Component {
         }
     }
     updateOperation = (e) => {
-        if(this.state.secondVal.includes(this.state.operation)){
+        if(this.state.secondVal && this.state.firstVal){
             this.carryOutOptn()
+            console.log(this.state.answer)
             this.setState({
                 operation: e.target.textContent,
                 secondVal: `${this.state.firstVal} ${e.target.textContent}`,
@@ -56,9 +58,10 @@ class CalcBody extends Component {
             default:
         }
         console.log(newVal)
-        this.setState({
+            this.setState({
             firstVal: newVal,
-            secondVal: ''
+            secondVal: '',
+            answer: newVal
         })
     }
     
@@ -88,7 +91,8 @@ class CalcBody extends Component {
                     <button className = 'btn operationButton' onClick = {this.updateOperation}>/</button>
                     <button className = 'btn operationButton' onClick = {this.updateOperation}>*</button>
                     <button className = 'btn operationButton' onClick = {this.handleDelete}>del</button>
-                    <button className = 'btn operationButton' onClick = {this.carryOutOptn}>=</button>
+                    <button className = 'btn operationButton' onClick = {()=>{this.carryOutOptn()
+                    console.log(this.state.firstVal)}}>=</button>
                 </div> 
                 </div>
             </div>
