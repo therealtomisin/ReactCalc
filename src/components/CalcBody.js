@@ -4,41 +4,47 @@ import CalcInput from './CalcInput'
 class CalcBody extends Component {
     constructor(props) {
         super(props)
-    
+
         this.state = {
-             firstVal: '',
-             secondVal: '',
-             operation: '',
-             answer: ''
+            firstVal: '',
+            secondVal: '',
+            operation: '',
+            answer: ''
         }
     }
     updateInput = (e) => {
-        if(this.state.firstVal.length >= 10){
+        if (this.state.firstVal.length >= 10) {
             return
-        } else {
+        } else if(this.state.answer !== ''){
+            return
+        }else {
             this.setState({
                 firstVal: this.state.firstVal + e.target.textContent
             })
         }
     }
+
     updateOperation = (e) => {
-        if(this.state.secondVal && this.state.firstVal){
+        if(this.state.operation !== '' && this.state.firstVal){
             this.carryOutOptn()
-            console.log(this.state.answer)
-            this.setState({
+            this.setState((prevState)=>({
                 operation: e.target.textContent,
-                secondVal: `${this.state.firstVal} ${e.target.textContent}`,
-                firstVal: ''
-            })
+                secondVal: `${prevState.firstVal}  ${e.target.textContent}`,
+                firstVal: '',
+                answer: ''
+            }))
         }else{
             this.setState({
                 secondVal: `${this.state.firstVal} ${e.target.textContent}`,
                 firstVal: '',
-                operation: e.target.textContent
+                operation: e.target.textContent,
+                answer: ''
             })
         }
     }
+
     carryOutOptn = () => {
+        console.log('run')
         var newVal;
         let firstElem = parseFloat(this.state.firstVal)
         let secondElem = parseFloat(this.state.secondVal)
@@ -57,14 +63,17 @@ class CalcBody extends Component {
             break
             default:
         }
-        console.log(newVal)
             this.setState({
             firstVal: newVal,
             secondVal: '',
-            answer: newVal
+            answer: newVal,
+            operation: ''
+        }, function(){
+            console.log(this.state.firstVal)
         })
-    }
-    
+        
+    } 
+
     handleDelete = () => {
         this.setState({
             firstVal: '',
@@ -73,27 +82,24 @@ class CalcBody extends Component {
     }
     render() {
         return (
-            <div>
-                <div className = 'calcBody'>
-                    <CalcInput firstVal = {this.state.firstVal} secondVal = {this.state.secondVal}/>
-                <div className = 'buttons'>
-                    <button className = 'btn numberButton' onClick = {this.updateInput}>1</button>
-                    <button className = 'btn numberButton' onClick = {this.updateInput}>2</button>
-                    <button className = 'btn numberButton' onClick = {this.updateInput}>3</button>
-                    <button className = 'btn numberButton' onClick = {this.updateInput}>4</button>
-                    <button className = 'btn numberButton' onClick = {this.updateInput}>5</button>
-                    <button className = 'btn numberButton' onClick = {this.updateInput}>6</button>
-                    <button className = 'btn numberButton' onClick = {this.updateInput}>7</button>
-                    <button className = 'btn numberButton' onClick = {this.updateInput}>8</button>
-                    <button className = 'btn numberButton' onClick = {this.updateInput}>9</button>
+            <div className='calcBody'>
+                <CalcInput operation={this.state.operation} answer={this.state.answer} firstVal={this.state.firstVal} secondVal={this.state.secondVal} />
+                <div className='buttons'>
+                    <button className='btn numberButton' onClick={this.updateInput}>1</button>
+                    <button className='btn numberButton' onClick={this.updateInput}>2</button>
+                    <button className='btn numberButton' onClick={this.updateInput}>3</button>
+                    <button className='btn numberButton' onClick={this.updateInput}>4</button>
+                    <button className='btn numberButton' onClick={this.updateInput}>5</button>
+                    <button className='btn numberButton' onClick={this.updateInput}>6</button>
+                    <button className='btn numberButton' onClick={this.updateInput}>7</button>
+                    <button className='btn numberButton' onClick={this.updateInput}>8</button>
+                    <button className='btn numberButton' onClick={this.updateInput}>9</button>
                     <button className = 'btn operationButton' onClick = {this.updateOperation}>+</button>
                     <button className = 'btn operationButton' onClick = {this.updateOperation}>-</button>
                     <button className = 'btn operationButton' onClick = {this.updateOperation}>/</button>
                     <button className = 'btn operationButton' onClick = {this.updateOperation}>*</button>
-                    <button className = 'btn operationButton' onClick = {this.handleDelete}>del</button>
-                    <button className = 'btn operationButton' onClick = {()=>{this.carryOutOptn()
-                    console.log(this.state.firstVal)}}>=</button>
-                </div> 
+                    <button className='btn operationButton' onClick={this.handleDelete}>del</button>
+                    <button className='btn operationButton' onClick={() => { this.carryOutOptn() }}>=</button>
                 </div>
             </div>
         )

@@ -1,8 +1,8 @@
 import React from 'react'
 
-function CalcInput(props) {
+function CalcInput1(props) {
     return (
-        <div className='inputBody'>
+        <div className = 'inputBody'>
             <span className = 'input firstInput'>
               {props.secondVal}
             </span>
@@ -11,7 +11,6 @@ function CalcInput(props) {
             </span>
         </div>
     )
-    console.log(props.answer)
 }
 
-export default CalcInput
+export default CalcInput1
