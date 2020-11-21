@@ -25,6 +25,7 @@ class CalcBody extends Component {
     }
 
     updateOperation = (e) => {
+        if(this.state.secondVal !== '' && this.state.firstVal === '') return;
         if(this.state.operation !== '' && this.state.firstVal){
             this.carryOutOptn()
             this.setState((prevState)=>({
@@ -44,7 +45,8 @@ class CalcBody extends Component {
     }
 
     carryOutOptn = () => {
-        console.log('run')
+        if (this.state.firstVal === '') return;
+        if(this.state.firstVal !== '' && this.state.secondVal === '') return this.state.firstVal;
         var newVal;
         let firstElem = parseFloat(this.state.firstVal)
         let secondElem = parseFloat(this.state.secondVal)
@@ -68,8 +70,6 @@ class CalcBody extends Component {
             secondVal: '',
             answer: newVal,
             operation: ''
-        }, function(){
-            console.log(this.state.firstVal)
         })
         
     } 
