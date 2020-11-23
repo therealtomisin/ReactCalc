@@ -9,45 +9,28 @@ function CalcBody1() {
         operation: '',
         answer: ''
     })
-    // const [firstVal, setFirstVal] = useState('')
-    // const [secondVal, setSecondVal] = useState('')
-    // const [operation, setOperation] = useState('')
-    // const [answer, setAnswer] = useState('')
 
     const updateOperation = (e) => {
-        console.log(allVals.firstVal.length)
-        console.log(typeof(allVals.firstVal))
-        console.log(typeof allVals.operation)
         if(allVals.secondVal !== '' && allVals.firstVal === '') return;
         if(allVals.operation !== '' && allVals.firstVal){
             carryOutOptn()
+            //let at = 9
             setAllVals({...allVals,
                 operation: e.target.textContent,
                 secondVal: `${allVals.firstVal} ${e.target.textContent}`,
                 firstVal: '',
                 answer: ''
             })
-            //console.log(allVals.secondVal.length)
-            //console.log(allVals.operation.length)
-                // setOperation(e.target.textContent)
-                // setSecondVal(`${allVals.firstVal}  ${e.target.textContent}`)
-                // setFirstVal('')
-                // setAnswer('')
         }
-        if(allVals.operation.length > 1){
-            return
-        }
-        else{
-            // setOperation(e.target.textContent)
-            // setSecondVal(`${firstVal} ${e.target.textContent}`)
-            // setFirstVal('')
-            setAllVals({
+        if(allVals.secondVal === '' && allVals.firstVal !== ''){
+            console.log(allVals.firstVal)
+            let it = allVals.firstVal
+            setAllVals({...allVals,
                 operation: e.target.textContent,
-                secondVal: `${allVals.firstval} ${e.target.textContent}`,
+                secondVal: `${it} ${e.target.textContent}`,
                 firstVal: '',
                 answer: ''
             })
-            //console.log(allVals.secondVal.length)
         }
 }
 
@@ -74,17 +57,12 @@ function CalcBody1() {
             default:
         }
         
-            // setFirstVal(newVal)
-            // setSecondVal('')
-            // setAnswer(newVal)
-            // setOperation('')
-            setAllVals({
+            setAllVals({...allVals,
                 firstVal: newVal,
                 secondVal: '',
                 operation: '',
                 answer: newVal
             })
-        
     } 
 
     const handleDelete = () => {
@@ -100,15 +78,15 @@ function CalcBody1() {
         <div className = 'calcBody'>
             <CalcInput1 operation = {allVals.operation} answer = {allVals.answer} firstVal = {allVals.firstVal} secondVal = {allVals.secondVal}/>
                 <div className = 'buttons'>
-                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({firstVal: allVals.firstVal + e.target.textContent})}>1</button>
-                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({firstVal: allVals.firstVal + e.target.textContent})}>2</button>
-                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({firstVal: allVals.firstVal + e.target.textContent})}>3</button>
-                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({firstVal: allVals.firstVal + e.target.textContent})}>4</button>
-                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({firstVal: allVals.firstVal + e.target.textContent})}>5</button>
-                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({firstVal: allVals.firstVal + e.target.textContent})}>6</button>
-                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({firstVal: allVals.firstVal + e.target.textContent})}>7</button>
-                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({firstVal: allVals.firstVal + e.target.textContent})}>8</button>
-                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({firstVal: allVals.firstVal + e.target.textContent})}>9</button>
+                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({...allVals,firstVal: allVals.firstVal + e.target.textContent})}>1</button>
+                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({...allVals,firstVal: allVals.firstVal + e.target.textContent})}>2</button>
+                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({...allVals,firstVal: allVals.firstVal + e.target.textContent})}>3</button>
+                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({...allVals,firstVal: allVals.firstVal + e.target.textContent})}>4</button>
+                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({...allVals,firstVal: allVals.firstVal + e.target.textContent})}>5</button>
+                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({...allVals,firstVal: allVals.firstVal + e.target.textContent})}>6</button>
+                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({...allVals,firstVal: allVals.firstVal + e.target.textContent})}>7</button>
+                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({...allVals,firstVal: allVals.firstVal + e.target.textContent})}>8</button>
+                    <button className = 'btn numberButton' onClick = {(e)=>setAllVals({...allVals,firstVal: allVals.firstVal + e.target.textContent})}>9</button>
                     <button className = 'btn operationButton' onClick = {(e)=>updateOperation(e)}>+</button>
                     <button className = 'btn operationButton' onClick = {(e)=>updateOperation(e)}>-</button>
                     <button className = 'btn operationButton' onClick = {(e)=>updateOperation(e)}>/</button>
@@ -128,7 +106,7 @@ export default CalcBody1
 // import React, {useState} from 'react'
 // import CalcInput1 from './CalcInput1'
 
-// function CalcBody1() {
+// function Calc...allVals,Body1() {
 
 //     const [allVals, setAllVals] = useState({
 //         firstVal: '',
