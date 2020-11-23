@@ -16,6 +16,8 @@ function CalcBody1() {
 
     const updateOperation = (e) => {
         console.log(allVals.firstVal.length)
+        console.log(typeof(allVals.firstVal))
+        console.log(typeof allVals.operation)
         if(allVals.secondVal !== '' && allVals.firstVal === '') return;
         if(allVals.operation !== '' && allVals.firstVal){
             carryOutOptn()
@@ -25,16 +27,16 @@ function CalcBody1() {
                 firstVal: '',
                 answer: ''
             })
-            console.log(allVals.secondVal.length)
+            //console.log(allVals.secondVal.length)
             //console.log(allVals.operation.length)
                 // setOperation(e.target.textContent)
                 // setSecondVal(`${allVals.firstVal}  ${e.target.textContent}`)
                 // setFirstVal('')
                 // setAnswer('')
         }
-        // if(allVals.operation.length > 1){
-        //     return
-        //}
+        if(allVals.operation.length > 1){
+            return
+        }
         else{
             // setOperation(e.target.textContent)
             // setSecondVal(`${firstVal} ${e.target.textContent}`)
