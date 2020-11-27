@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import CalcInput1 from './CalcInput1'
 
 function CalcBody1() {
@@ -17,17 +17,16 @@ function CalcBody1() {
             //let at = 9
             setAllVals({...allVals,
                 operation: e.target.textContent,
-                secondVal: `${allVals.firstVal} ${e.target.textContent}`,
+                secondVal: `${prevFirstVal} ${e.target.textContent}`,
                 firstVal: '',
                 answer: ''
             })
         }
         if(allVals.secondVal === '' && allVals.firstVal !== ''){
             console.log(allVals.firstVal)
-            let it = allVals.firstVal
             setAllVals({...allVals,
                 operation: e.target.textContent,
-                secondVal: `${it} ${e.target.textContent}`,
+                secondVal: `${allVals.firstVal} ${e.target.textContent}`,
                 firstVal: '',
                 answer: ''
             })
@@ -63,7 +62,13 @@ function CalcBody1() {
                 operation: '',
                 answer: newVal
             })
+            
     } 
+    const prevFirstValRef = useRef()
+    useEffect(()=>{
+        prevFirstValRef.current = allVals.firstVal
+    })
+    const prevFirstVal = prevFirstValRef.current;
 
     const handleDelete = () => {
         setAllVals({
